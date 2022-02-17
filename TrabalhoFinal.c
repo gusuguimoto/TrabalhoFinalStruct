@@ -11,7 +11,7 @@ int main(){
   printf("Digite a quantidade de alunos: ");
   scanf("%d", &NAluno);
 
-  nota=(float*)malloc(4*sizeof(float));
+  nota=(float*)malloc(16*sizeof(float));
 
   if(nota==NULL){
     printf("Error: Memoria insuficiente! \n");
