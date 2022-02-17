@@ -2,35 +2,45 @@
 #include <stdlib.h>
 #include <math.h>
 int main(){
-  int i, j, N1, N2;
+  int i, j, NAval, NAluno;
   float somaAl[j], somaAv[j], somaDP[j], notas[j], mediaAl[j], mediaAv[j], desvio[j];
+  float *nota;
 
   printf("Digite a quantidade de avaliacoes: ");
-  scanf("%d", &N1);
+  scanf("%d", &NAval);
   printf("Digite a quantidade de alunos: ");
-  scanf("%d", &N2);
+  scanf("%d", &NAluno);
 
-  for(i=0; i<N1; i++){
+  nota=(float*)malloc(4*sizeof(float));
+
+  if(nota==NULL){
+    printf("Error: Memoria insuficiente! \n");
+    exit(1);
+  }
+
+  for(i=0; i<NAval; i++){
     printf("\n----- Avaliacao %d -----\n", i+1);
-    for(j=0; j<N2; j++){
+    for(j=0; j<NAluno; j++){
       printf("Nota do aluno [%d]: ", j+1);
-      scanf("%f", &notas[j]);
-      somaAl[j] = somaAl[j] + notas[j];
-      somaAv[i] = somaAv[i] + notas[j];
+      scanf("%f", &nota[j], &nota[i]);
+      somaAl[j] = somaAl[j] + nota[j];
+      somaAv[i] = somaAv[i] + nota[i];
     }
   }
 
   printf("\nResultado Final\n");
   printf("Medias arredondadas, para cima, dos alunos: \n");
-  for(j=0; j<N2; j++){
-    mediaAl[j] = somaAl[j]/N1;
+  for(j=0; j<NAluno; j++){
+    mediaAl[j] = somaAl[j]/NAval;
     printf("Aluno [%d]-> %.2f\n", j+1, ceil(mediaAl[j]));
     }
 
   printf("\nMedia e desvio padrao(populacional) das avaliacoes: \n");
-  for(j=0; j<N1; j++){
-    mediaAv[j] = somaAv[j]/N2;
-    desvio[j] = desvio[j] + pow(notas[j]-mediaAv[j],2);
-    printf("Desvio padrao da avaliacao [%d]: %.2f\n", j+1, sqrt(desvio[j])/N2);
+  for(i=0; i<NAval; i++){
+    mediaAv[i] = somaAv[i]/NAluno;
+    desvio[i] = desvio[i] + pow(notas[i]-mediaAv[i],2);
+    printf("Desvio padrao da avaliacao [%d]: %.2f\n", i+1, sqrt(desvio[i])/NAluno);
   }
+  free(nota);
+  return 0;
 }
