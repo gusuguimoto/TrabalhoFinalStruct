@@ -22,10 +22,6 @@ int main(){
     for(j=0; j<alunos; j++){
       printf("Nota do aluno [%d]: ", j+1);
       scanf("%f", &nota[j][i]);
-      if(nota[j][i]>10 || nota[j][i]<0){
-        printf("\n\nERROR: VALOR DE NOTA INVALIDO!\n\n");
-        exit(1);
-      }
     }
   }
   printf("\n\n --- Notas imputadas ---");
@@ -65,5 +61,8 @@ int main(){
     printf("\tDesvio padrao: %.2f\n", desvio);
   }
   printf("\n");
+  for (i=0; i<alunos; i++){
+    free(nota);
+  }
   free(nota);
 }
